@@ -34,4 +34,5 @@
 - sign up, sign in and sign out funtionality
 - comment field for clients(workers) created with redactor
 - responsive design of project
+- protection agains SQL injection
 
