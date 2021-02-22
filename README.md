@@ -2,7 +2,8 @@
 
 
 The project is a CRUD that can write into database a client(worker) that works into specific company.
-The database should have three tables.
+
+**The database should have three tables.**
 1. Companies table
 - id: int(11),
 - name: int(11),
