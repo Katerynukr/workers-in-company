@@ -6,14 +6,22 @@ The database should have three tables.
 1. Companies table
 - id: int(11),
 - name: int(11),
-address:int(11),
-place: varchar(64),
-uab: varchar(255)
+- address:int(11),
+- place: varchar(64),
+- uab: varchar(255)
 2. Clients(workers) table
-*id: int(11),
-*name: varchar(32),
-*
-*address:int(11)
+- id: int(11),
+- name: varchar(32),
+- surname: varchar(32),
+- phone: varchar(24),
+- email: varchar(64),
+- comment: text,
+- company_id: (connection to companies table by company's id)
+3. Users table:
+-id: int(11),
+-email: varcahr(64)
+password: varcahr(128)
+
 Praktinė užduotis. Klientų kontaktinės informacijos sistema.
 Sukurkite klientų kontaktų saugojimui skirtą programėlę, kurioje galėtumėte išsaugoti klientų informaciją ir jų įmones.
 Pavyzdžiui, į programėlę turi eiti įrašyti klientą: Joną Jonaitį, kuris dirba UB „Programuotojas“ įmonėje, tačiau taip pat turi eiti įrašyti ir Petrą Petraitį kuris niekur nedirba.
