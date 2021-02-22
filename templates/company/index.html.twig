@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} List of Companies
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row justify-content-center" >
+			<div class="col-md-8">
+				<div>
+					<div>
+					
+						<h1> List of Companies</h1>
+					</div>
+					{% if companies|length == 0 %}
+							<div class="margin-top"></div>
+							<div class="row justify-content-center">
+								<h3 style="width:100%;text-align:center;">Your list of companies is empty</h3>
+								<p>Go to:</p>
+								<a class="btn btn-dark btn-add save-btn btn-block" href="{{ path('company_create') }}">
+									Create a company
+ 								</a>
+							</div>
+						{% else %}
+					<div>
+						List order by:
+						<form action="{{ path('company_index')}}" method="GET" class="sort-form">
+							<div class="btn-group order-by">
+								<select name="sort_by" class="btn btn-outline-dark dropdown-toggle">
+									<option value="default">Default</option>
+									<option value="sort_by_uab_asc" {% if sortBy=='sort_by_uab_asc' %} selected {% endif %}> UAB Name a-z</option>
+									<option value="sort_by_uab_desc" {% if sortBy=='sort_by_uab_desc' %} selected {% endif %}>UAB Name z-a</option>
+									<option value="sort_by_name_asc" {% if sortBy=='sort_by_name_asc' %} selected {% endif %}> Company's Code a-z</option>
+									<option value="sort_by_name_desc" {% if sortBy=='sort_by_name_desc' %} selected {% endif %}> Company's Code z-a</option>
+								</select>
+								<button type="submit" class="btn btn-sort">Sort IT!</button>
+								<a href="{{ path('company_index')}}" class="btn btn-sort">
+									<i class="fa fa-eraser" aria-hidden="true"></i>
+								</a>
+							</div>
+						</form>
+						<ul class="list-group unordered-list bck">
+							{% for company in  companies %}
+								<li class="bck li-bck " style="background:transparent;">
+									<div class="list-group-item__line single-element info-list">
+                                        <span>
+											UAB " {{company.uab}} "
+										</span>
+										<div class="list-group-item__line__buttons">
+											<a href="{{ path('company_edit', {id: company.id}) }}" class="btn-edit btn">
+												<i class="fa fa-plus" aria-hidden="true"></i>
+											</a>
+											<form action="{{ path('company_delete', {id: company.id}) }}" method="POST"> 
+												<input type="hidden" name="token" value="{{ csrf_token('check_csrf_hidden') }}"/>
+												<button type="submit" class="btn-delete btn">
+													<i class="fa fa-trash" aria-hidden="true"></i>
+												</button>
+											</form> 
+										</div>
+									</div>
+                                    <div class="list-group-item__line single-element info-list">
+                                        <span>
+											Registration code : {{company.name}}
+										</span>
+                                    </div>
+                                    <div class="list-group-item__line single-element info-list">
+                                        Index: {{company.address}}
+                                    </div>
+									<div class="list-group-item__line single-element info-list">
+                                        Address: {{company.place}}
+                                    </div>
+								</li>
+							{% endfor %} 
+						</ul>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+{% endblock %}

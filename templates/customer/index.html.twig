@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	List of Customers
+{% endblock %}
+
+
+{% block body %}
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div>
+					<div>
+						<h1>List  of Customers</h1>
+					</div>
+					{% if customers|length == 0 %}
+						<div class="margin-top"></div>
+						<div class="row justify-content-center">
+							<h3 style="width:100%;text-align:center;">Your list of customers is empty</h3>
+							<p>Go to:</p>
+							<a class="btn btn-dark btn-add save-btn btn-block" href="{{ path('customer_create') }}">
+								Create a customer
+							</a>
+						</div>
+					{% else %}
+						<div>
+							List order by:
+							<form action="{{ path('customer_index')}}" method="GET" class="sort-form">
+								<div class="btn-group order-by">
+									<select name="filter" class="btn btn-outline-dark dropdown-toggle">
+										<option value="0">All</option>
+										{% for company in companies %}
+											<option value="{{company.id}}" {% if companyID == company.id %} selected {% endif %}>UAB " {{company.uab}} "</option>
+										{% endfor %}
+									</select>
+									<button type="submit" class="btn btn-sort">Firlter IT!</button>
+									<a href="{{ path('customer_index')}}" class="btn btn-sort">
+										<i class="fa fa-eraser" aria-hidden="true"></i>
+									</a>
+								</div>
+							</form>
+							<ul class="list-group unordered-list ">
+								{% for customer in customers %}
+									<li class=" li-bck" style="background:transparent;">
+										<div class="list-group-item__line single-element info-list">
+											<span>
+												<div class="single-element">
+													{{customer.name}}
+													{{customer.surname}}
+												</div>
+											</span>
+											<div class="list-group-item__line__buttons">
+												<a href="{{ path('customer_edit', {id: customer.id}) }}" class="btn-edit btn">
+													<i class="fa fa-plus" aria-hidden="true"></i>
+												</a>
+												<form action="{{ path('customer_delete', {id: customer.id}) }}" method="POST">
+													<input type="hidden" name="token" value="{{ csrf_token('check_csrf_hidden') }}"/>
+													<button type="submit" class="btn-delete btn">
+														<i class="fa fa-trash" aria-hidden="true"></i>
+													</button>
+												</form>
+											</div>
+										</div>
+										<div class="list-group-item__line single-element">
+											<div class="single-element list-group-item__line">
+												Phone Number :
+												{{customer.phone}}
+											</div>
+										</div>
+										<div class="list-group-item__line single-element">
+											<div class="single-element list-group-item__line">
+												Email Address :
+												{{customer.email}}
+											</div>
+										</div>
+										<div class="list-group-item__line single-element">
+											<div class="single-element list-group-item__line">
+												{% for company in companies %}
+													{% if company.id == customer.companyId %}
+														Working Company: UAB "
+														{{company.uab}}
+														"
+													{% endif %}
+												{% endfor %}
+											</div>
+										</div>
+										<div class="list-group-item__line single-element">
+											<div class="single-element list-group-item__line">
+												Comment:
+												{{customer.comment|raw}}
+											</div>
+										</div>
+
+									</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Company{% endblock %}
+
+{% block body %}
+
+<div class="container">
+   <div class="row justify-content-center">
+       <div class="col-md-8">
+           <div>
+               <div>
+                    <h1>Create New Company</h1>
+                </div>
+               <div>
+                     <form action="{{path('company_store')}}" method="POST">
+                        <div>
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <input type="text" class="form-control input-text" name="company_name" value="{{company_name}}">
+                                <small class="form-text text-muted">Numeric identification of a company.  Numbers only!</small>
+                            </div>
+                            <div class="form-group">
+                                <label>UAB:</label>
+                                 <input type="text" class="form-control input-text" name="company_uab" value="{{company_uab}}">
+                                <small class="form-text text-muted">Name of the company</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Index:</label>
+                                <input type="text" class="form-control input-text" name="company_address" value="{{company_address}}">
+                                <small class="form-text text-muted">Address of a company. Numbers only!</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Address:</label>
+                                <input type="text" class="form-control input-text" name="company_place" value="{{company_place}}">
+                                <small class="form-text text-muted">Address of a company.</small>
+                            </div>
+                            <input type="hidden" name="token" value="{{ csrf_token('check_csrf_hidden') }}"/>
+                            <button type="submit" class="save-btn btn btn-add btn-block">Add new company</button>
+                        </div>   
+                    </form>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+ 
+{% endblock %}
