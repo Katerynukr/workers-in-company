@@ -1,7 +1,4 @@
-# workers-in-company
-
-
-The project is a CRUD that can write into database a client(worker) that works into specific company.
+#The project is a CRUD that can write into database a client(worker) that works into specific company.
 
 **The database should have three tables.**
 
